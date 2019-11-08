@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import "./Profile.css";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import AddPostForm from '../AddPostForm/AddPostForm'
 
 class Profile extends Component {
+
+    state ={
+        addPost: false
+    }
     render() {
 
         return (
+            <div>
             <div className="profile-bar">
                 <div className="Profile-user">
                     <div className="Profile-user-avatar">
@@ -19,14 +25,21 @@ class Profile extends Component {
                     <span className="profile-stats">Following: 412</span>
                 </div>
                 </div>
-                <Button className="add-button"
-                     type="submit"
+                {!this.state.addPost ? <Button
+                    onClick={() => this.setState({
+                        addPost: true
+                    })}
+                    className="add-button"
+                    type="submit"
                     fullWidth
                     variant="contained"
                     color="primary"
                     startIcon={<AddIcon />}>
                         Add Post
-                    </Button>
+                    </Button> : null}
+                
+            </div>
+            {this.state.addPost ? <AddPostForm /> : null}
             </div>
         )
     }

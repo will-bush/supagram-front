@@ -60,8 +60,6 @@ class App extends Component {
       <UserPage {...routerProps} user={this.state.username}/>
     )}/>
     <SignUp />
-     <SignIn />
-     
      </Switch>
     </div>
   )};

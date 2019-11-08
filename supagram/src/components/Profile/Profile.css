@@ -12,7 +12,7 @@
 
   .Profile-user {
     display: flex;
-    padding: 16px;
+    padding-left: 20px;
     align-items: center;
     height: 100px;
     margin-bottom: 10px;
