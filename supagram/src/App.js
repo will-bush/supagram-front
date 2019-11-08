@@ -7,27 +7,64 @@ import './App.css';
 import SignIn from './components/SignIn/SignIn'
 import SignUp from './components/SignUp/SignUp'
 import AppBar from './components/AppBar/AppBar'
-import Post from './components/Post/Post';
-import Profile from './components/Profile/Profile'
+import UserPage from './components/UserPage/UserPage'
 
 // IMPORT API
 import API from './API'
 
 class App extends Component {
 
+  state = {
+    username: ''
+  }
+
+  signIn = user => {
+    this.setState({ username: user.username })
+    localStorage.setItem('token', user.token)
+  }
+
+  // signOut = () => {
+  //   this.setState({ username: '' })
+  //   localStorage.removeItem('token')
+  // }
+
+  // componentDidMount () {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     API.validate()
+  //       .then(data => {
+  //         if (data.error) throw Error(data.error)
+
+  //         this.signIn(data)
+  //         this.props.history.push('/inventory')
+  //       })
+  //       .catch(error => alert(error))
+  //   }
+  // }
+
 
   render() {
   return (
     <div className="App">
     <AppBar />
-    <Profile />
-     <Post />
-     <Post />
+    <Switch>
+      <Route
+      path='/signin'
+      component={routerProps => (
+        <SignIn {...routerProps} signIn={this.signIn}/>
+      )}
+      />
+    <Route 
+    path='/profile'
+    component={routerProps => (
+      <UserPage {...routerProps} user={this.state.username}/>
+    )}/>
+    <SignUp />
      <SignIn />
-     <SignUp />
      
+     </Switch>
     </div>
   )};
 }
 
-export default App;
+export default withRouter(App);
