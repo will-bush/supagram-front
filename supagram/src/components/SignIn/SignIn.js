@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import SignInForm from './SignInForm';
 
 function Copyright() {
   return (
@@ -51,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+function SignIn() {
   const classes = useStyles();
 
   return (
@@ -92,6 +93,7 @@ export default function SignIn() {
             label="Remember me"
           />
           <Button
+            onClick={this.props.SignIn}
             type="submit"
             fullWidth
             variant="contained"
@@ -117,6 +119,10 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+      <SignInForm />
     </Container>
+    
   );
 }
+
+export default SignIn;

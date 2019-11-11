@@ -15,7 +15,7 @@ class Post extends Component {
               <img src="https://media.licdn.com/dms/image/C4D03AQETNALH0mqtNA/profile-displayphoto-shrink_100_100/0?e=1578528000&v=beta&t=oVlsRj3AsptLp6v7hud8qYE8qVqZoJ-818ljIdOy6-Y" alt="Will" />
             </div>
             <div className="Post-user-nickname">
-              <span>Will</span>
+              <span>{this.props.username}</span>
             </div>
             <div className="More-dots">
                 <MoreHorizIcon />
@@ -24,7 +24,7 @@ class Post extends Component {
         </header>
         <div className="Post-image">
           <div className="Post-image-bg">
-            <img alt="Icon Living" src="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" />
+            <img alt="Icon Living" src={this.props.image} />
           </div>
         </div>
         <div className="Like-icon">
