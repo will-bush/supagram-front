@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import './PostForm.css';
 
 import API from "../../adapters/API"
 
@@ -13,7 +14,7 @@ export class PostForm extends Component {
         <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" className="title">
           Add a new post
         </Typography>
       <form onSubmit={this.handleSubmit}>

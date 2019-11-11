@@ -11,7 +11,7 @@ import UserPage from './components/UserPage/UserPage'
 
 
 // IMPORT API
-import API from './adapters/API'
+// import API from './adapters/API'
 
 class App extends Component {
 
@@ -29,19 +29,19 @@ class App extends Component {
   //   localStorage.removeItem('token')
   // }
 
-  componentDidMount () {
-    const token = localStorage.getItem('token')
-    if (token) {
-      API.validate()
-        .then(data => {
-          if (data.error) throw Error(data.error)
+  // componentDidMount () {
+  //   const token = localStorage.getItem('token')
+  //   if (token) {
+  //     API.validate()
+  //       .then(data => {
+  //         if (data.error) throw Error(data.error)
 
-          this.signIn(data)
-          this.props.history.push('/profile')
-        })
-        .catch(error => alert(error))
-    }
-  }
+  //         this.signIn(data)
+  //         this.props.history.push('/profile')
+  //       })
+  //       .catch(error => alert(error))
+  //   }
+  // }
 
 
   render() {
