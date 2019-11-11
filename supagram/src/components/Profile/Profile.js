@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Profile.css";
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import AddPostForm from '../AddPostForm/AddPostForm'
+import PostForm from '../PostForm/PostForm'
 
 class Profile extends Component {
 
@@ -39,7 +39,7 @@ class Profile extends Component {
                     </Button> : null}
                 
             </div>
-            {this.state.addPost ? <AddPostForm /> : null}
+            {this.state.addPost ? <PostForm /> : null}
             </div>
         )
     }
