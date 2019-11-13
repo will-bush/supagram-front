@@ -19,10 +19,10 @@ class Profile extends Component {
                         <img src="https://media.licdn.com/dms/image/C4D03AQETNALH0mqtNA/profile-displayphoto-shrink_100_100/0?e=1578528000&v=beta&t=oVlsRj3AsptLp6v7hud8qYE8qVqZoJ-818ljIdOy6-Y" alt="Will" />
                     </div>
                 <div className="Profile-user-nickname">
-                    <span>Will</span>
-                    <span className="profile-stats">Posts: 120</span>
-                    <span className="profile-stats">Followers: 840</span>
-                    <span className="profile-stats">Following: 412</span>
+                    <span>{this.props.username}</span>
+                    <span className="profile-stats">Posts: {this.props.post_count}</span>
+                    <span className="profile-stats">Followers: {this.props.follower_count}</span>
+                    <span className="profile-stats">Following: {this.props.followed_count}</span>
                 </div>
                 </div>
                 {!this.state.addPost ? <Button
@@ -39,7 +39,7 @@ class Profile extends Component {
                     </Button> : null}
                 
             </div>
-            {this.state.addPost ? <PostForm /> : null}
+            {this.state.addPost ? <PostForm addNewPost={this.props.addNewPost}/> : null}
             </div>
         )
     }

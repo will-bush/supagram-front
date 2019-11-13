@@ -176,11 +176,6 @@ export class SignUpForm extends Component {
   signUp = event => {
     event.preventDefault();
     API.signUp(this.state)
-    // .then(data => {
-    //   localStorage.setItem("token", data.token)
-    //   this.props.history.push('/profile')
-    // })
-    // .catch(console.error)
 }
 
 }
