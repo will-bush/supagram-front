@@ -124,12 +124,6 @@ export class SignUpForm extends Component {
             variant="contained"
             color="primary"
         >Sign up</Button> }
-        {/* <Button
-            onClick={this.signUp}
-            fullWidth
-            variant="contained"
-            color="primary"
-        >Sign up</Button> */}
       </form>
       </div>
       <Box mt={5}>
@@ -149,25 +143,25 @@ export class SignUpForm extends Component {
         case 'name': 
           errors.fullName = 
             value.length < 5
-              ? 'Full Name must be 5 characters long!'
+              ? 'Full Name must be at least 4 characters long!'
               : '';
           break;
-        case 'email': 
-          errors.email = 
-            validEmailRegex.test(this.state.errors.email)
-              ? 'Email is not valid!'
-              : '';
-          break;
+        // case 'email': 
+        //   errors.email = 
+        //     validEmailRegex.test(this.state.errors.email)
+        //       ? 'Email is not valid!'
+        //       : '';
+        //   break;
           case 'username': 
           errors.username = 
-          value.length < 5
-              ? 'Username is not valid - must be 5 characters long!'
+          value.length < 4
+              ? 'must start and end with a letter, number or _, and contain no special characters other than . and _'
               : '';
           break;
         case 'password': 
           errors.password = 
             value.length < 8
-              ? 'Password must be at least 8 characters long, etc!'
+              ? 'Password must have at least 8 characters, 1 number and 1 special character!'
               : '';
           break;
         default:
@@ -181,12 +175,17 @@ export class SignUpForm extends Component {
 
   signUp = event => {
     event.preventDefault();
-    API.signUp(this.state);
-  }
+    API.signUp(this.state)
+    // .then(data => {
+    //   localStorage.setItem("token", data.token)
+    //   this.props.history.push('/profile')
+    // })
+    // .catch(console.error)
+}
 
 }
 
-const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+// const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
 
 export default SignUpForm;

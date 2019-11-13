@@ -84,5 +84,6 @@
   }
 
   .More-dots {
-    padding-left: 375px;
+    padding-left: 310px;
+    /* float: right; */
   }
