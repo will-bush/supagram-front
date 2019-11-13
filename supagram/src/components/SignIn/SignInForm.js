@@ -90,7 +90,11 @@ export class SignInForm extends Component {
   signIn = event => {
     event.preventDefault();
     API.signIn(this.state)
-      .then(data => localStorage.setItem("token", data.token))
+      .then(data => {
+        this.props.addUserToState(data.user)
+        localStorage.setItem("token", data.token)
+        this.props.history.push('/profile')
+      })
       .catch(console.error)
   }
 }

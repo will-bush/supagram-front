@@ -11,12 +11,12 @@ import UserPage from './components/UserPage/UserPage'
 
 
 // IMPORT API
-// import API from './adapters/API'
+import API from './adapters/API'
 
 class App extends Component {
 
   state = {
-    username: ''
+    user: {}
   }
 
   // signIn = user => {
@@ -43,6 +43,12 @@ class App extends Component {
   //   }
   // }
 
+  addUserToState = (userData) => {
+    this.setState({
+      user: userData
+    })
+  }
+
 
   render() {
   return (
@@ -52,13 +58,13 @@ class App extends Component {
       <Route
       path='/signin'
       component={routerProps => (
-        <SignInForm {...routerProps} signIn={this.signIn}/>
+        <SignInForm {...routerProps} signIn={this.signIn} addUserToState={this.addUserToState}/>
       )}
       />
     <Route 
     path='/profile'
     component={routerProps => (
-      <UserPage {...routerProps} user={this.state.username}/>
+      <UserPage {...routerProps} user={this.state.user}/>
     )}/>
       <Route
       path='/sign-up'

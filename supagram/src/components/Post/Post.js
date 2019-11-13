@@ -3,10 +3,18 @@ import React, { Component } from "react";
 import "./Post.css";
 import PostComment from './PostComment'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-
+import FavoriteIcon from '@material-ui/icons/Favorite';
+// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import Button from '@material-ui/core/Button';
+import { timingSafeEqual } from "crypto";
 
 class Post extends Component {
+
+  state = {
+    liked: false,
+    followed: false
+  }
+  
   render() {
     return <article className="Post" ref="Post">
         <header>
@@ -18,17 +26,25 @@ class Post extends Component {
               <span>{this.props.username}</span>
             </div>
             <div className="More-dots">
-                <MoreHorizIcon />
+                {/* <MoreHorizIcon /> */}
+                <Button
+                  onClick={() => this.handleFollowClick()}
+                  small
+                  variant="contained"
+                  color="primary"
+  >{this.state.followed ? "Unfollow" : "Follow"}</Button>
             </div>
           </div>
         </header>
         <div className="Post-image">
           <div className="Post-image-bg">
-            <img alt="Icon Living" src={this.props.image} />
+            <img alt="alt text" src={this.props.image} />
           </div>
         </div>
-        <div className="Like-icon">
-            <FavoriteBorderOutlinedIcon />
+        <div className="Like-icon"
+              onClick={() => this.handleLikeClick()}>
+                {this.state.liked ? <FavoriteIcon color="error"/> : <FavoriteBorderOutlinedIcon/>}
+            
         </div>
         <div className="Like-count">
             <p>1,234 likes</p>
@@ -45,6 +61,18 @@ class Post extends Component {
             4 HOURS AGO
         </div>
       </article>;
+    }
+
+    handleLikeClick = () => {
+      this.setState({
+        liked: !this.state.liked
+      })
+    }
+
+    handleFollowClick = () => {
+      this.setState({
+        followed: !this.state.followed
+      })
     }
 }
 export default Post;

@@ -12,14 +12,14 @@ const get = url =>
   }).then(resp => resp.json())
 
 
-  // const post = (url, data) =>
-  // fetch(url, {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify(data)
-  // }).then(resp => resp.json())
+  const post = (url, data) =>
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(resp => resp.json())
 
   const signIn = credentials => {
     const config = {
@@ -67,7 +67,8 @@ const API = {
   signIn,
   signUp,
   submitPost,
-  validate
+  validate,
+  post
 }
 
 export default API;

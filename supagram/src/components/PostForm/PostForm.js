@@ -9,6 +9,10 @@ import './PostForm.css';
 import API from "../../adapters/API"
 
 export class PostForm extends Component {
+
+  state = {
+
+  }
   render() {
     return (
         <Container component="main" maxWidth="xs">
@@ -51,6 +55,7 @@ export class PostForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
+    console.log(formData)
     API.submitPost(formData)
       .then(console.log)
       .catch(console.error);

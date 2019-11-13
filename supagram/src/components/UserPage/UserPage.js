@@ -4,6 +4,22 @@ import Post from '../Post/Post'
 
 class UserPage extends React.Component {
 
+    state = {
+
+    }
+
+    componentDidMount() {
+        // what do we need to do when the component has mounted?
+    }
+
+    getPosts = () => {
+        // function to get posts from API
+    }
+
+    getProfile = () => {
+        // function to get profile info?
+    }
+
     render() {
 
         return (
