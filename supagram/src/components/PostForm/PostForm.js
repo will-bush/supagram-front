@@ -58,6 +58,7 @@ export class PostForm extends Component {
     // console.log(formData)
     API.submitPost(formData)
       .then((resp) => this.props.addNewPost(resp))
+      .then(() => this.props.resetPostForm())
       .catch(console.error);
   }
 }

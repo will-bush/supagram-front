@@ -9,6 +9,9 @@ class Profile extends Component {
     state ={
         addPost: false
     }
+
+    resetPostForm = () => {this.setState({ addPost: false })}
+
     render() {
 
         return (
@@ -39,7 +42,7 @@ class Profile extends Component {
                     </Button> : null}
                 
             </div>
-            {this.state.addPost ? <PostForm addNewPost={this.props.addNewPost}/> : null}
+            {this.state.addPost ? <PostForm addNewPost={this.props.addNewPost} resetPostForm={this.resetPostForm}/> : null}
             </div>
         )
     }
