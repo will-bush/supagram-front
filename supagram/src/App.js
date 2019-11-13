@@ -11,7 +11,7 @@ import UserPage from './components/UserPage/UserPage'
 
 
 // IMPORT API
-import API from './adapters/API'
+// import API from './adapters/API'
 
 class App extends Component {
 

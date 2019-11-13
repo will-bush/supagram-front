@@ -1,38 +1,21 @@
 const BASE_URL = "http://localhost:3000";
 const SIGN_IN_URL = BASE_URL + "/sign-in";
 const SIGNUP_URL = BASE_URL + "/sign-up";
-const CREATE_POST_URL = BASE_URL + "/posts/create";
-const validateUrl = BASE_URL + '/validate'
+const POSTS_URL = BASE_URL + "/posts";
+const FOLLOW_URL = BASE_URL + "/follow";
 
-const get = url =>
-  fetch(url, {
+const signIn = credentials => {
+  const config = {
+    method: "POST",
     headers: {
-      Authorization: localStorage.getItem('token')
-    }
-  }).then(resp => resp.json())
-
-
-  const post = (url, data) =>
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
-    body: JSON.stringify(data)
-  }).then(resp => resp.json())
-
-  const signIn = credentials => {
-    const config = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(credentials)
-    }
-    return fetch(SIGN_IN_URL, config)
-      .then(res => res.json());
+    body: JSON.stringify(credentials)
   }
+  return fetch(SIGN_IN_URL, config)
+    .then(res => res.json());
+}
 
 const signUp = userDetails => {
   const config = {
@@ -56,19 +39,94 @@ const submitPost = formData => {
     },
     body: formData
   }
-  return fetch(CREATE_POST_URL, config)
-    .then(res => res.json())
-    .then(console.log);
+  return fetch(POSTS_URL, config)
+    .then(res => res.json());
 }
 
-const validate = () => get(validateUrl)
+const postLike = postId => {
+  const config = {
+    method: "POST",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  return fetch(POSTS_URL + `/${postId}`, config)
+    .then(res => res.json());
+}
+
+const deleteLike = postId => {
+  const config = {
+    method: "DELETE",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  return fetch(POSTS_URL + `/${postId}`, config)
+    .then(res => res.json());
+}
+
+const postFollow = idToFollow => {
+  const config = {
+    method: "POST",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      follow: {
+        followed_id: idToFollow
+      }
+    })
+  }
+  return fetch(FOLLOW_URL, config)
+    .then(res => res.json());
+}
+
+const deleteFollow = idToUnfollow => {
+  const config = {
+    method: "DELETE",
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      follow: {
+        followed_id: idToUnfollow
+      }
+    })
+  }
+  return fetch(FOLLOW_URL, config)
+    .then(res => res.json())
+}
+
+const getFeed = () => {
+  const config = {
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  return fetch(POSTS_URL, config)
+    .then(res => res.json())
+}
+
 
 const API = {
   signIn,
   signUp,
   submitPost,
-  validate,
-  post
+  postLike,
+  deleteLike,
+  postFollow,
+  deleteFollow,
+  getFeed
 }
 
 export default API;

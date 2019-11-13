@@ -1,33 +1,38 @@
 import React from 'react';
 import Profile from '../Profile/Profile'
 import Post from '../Post/Post'
+import API from '../../adapters/API';
 
 class UserPage extends React.Component {
 
     state = {
-
+        feed: [],
+        user: {}
     }
 
     componentDidMount() {
-        // what do we need to do when the component has mounted?
+        API.getFeed().then(resp => this.setState({
+            feed: resp.feed,
+            user: resp.user
+        }))
     }
+        // API.getFeed().then(resp => console.log(resp))
 
-    getPosts = () => {
-        // function to get posts from API
-    }
-
-    getProfile = () => {
-        // function to get profile info?
-    }
+        addNewPost = (post) => {
+            this.setState({
+                feed: [post, ...this.state.feed]
+            })
+        }
+    
 
     render() {
 
         return (
             <div>
-                <Profile />
-                <Post image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" username="Will"/>
-                <Post image="https://images.unsplash.com/photo-1573120923395-155c87bf2c31?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" username="Will"/>
-                <Post image="https://images.unsplash.com/photo-1573137710792-c8f26d780975?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" username="Will"/>            
+                <Profile username={this.state.user.username} followed_count={this.state.user.followed_count} follower_count={this.state.user.follower_count} post_count={this.state.user.post_count} addNewPost={this.addNewPost}/>
+                {this.state.feed.map(item => (
+                <Post image={item.post.image_url} username={item.post.author.username} post={item.post} caption={item.post.caption} likes={item.post.like_count}/>)
+                )}
                 </div>
         )
     }

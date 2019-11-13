@@ -55,9 +55,10 @@ export class PostForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     const formData = new FormData(event.target)
-    console.log(formData)
+    // console.log(formData)
     API.submitPost(formData)
-      .then(console.log)
+      .then((resp) => this.props.addNewPost(resp))
+      .then(() => this.props.resetPostForm())
       .catch(console.error);
   }
 }

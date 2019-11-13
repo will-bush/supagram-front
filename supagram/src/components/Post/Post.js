@@ -12,7 +12,14 @@ class Post extends Component {
 
   state = {
     liked: false,
-    followed: false
+    followed: false,
+    post: {}
+  }
+
+  componentDidMount() {
+    this.setState({
+      post: this.props.post
+    })
   }
   
   render() {
@@ -47,16 +54,16 @@ class Post extends Component {
             
         </div>
         <div className="Like-count">
-            <p>1,234 likes</p>
+          <p> {this.props.likes} likes</p>
         </div>
         <div className="Post-caption">
-          <strong>Will</strong> This is the caption for the post!
+          <strong>Will</strong> {this.props.caption}
         </div>
-        <div className="View-more">
+        {/* <div className="View-more">
             View all 27 comments
-        </div>
-        <PostComment name="Angus" content="This is a comment on a post."/>
-        <PostComment name="Mike" content="This is another comment on the same post."/>
+        </div> */}
+        {/* <PostComment name="Angus" content="This is a comment on a post."/> */}
+        {/* <PostComment name="Mike" content="This is another comment on the same post."/> */}
         <div className="Small-text">
             4 HOURS AGO
         </div>
