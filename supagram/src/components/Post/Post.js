@@ -75,6 +75,8 @@ class Post extends Component {
     }
 
     handleLikeClick = (id) => {
+      console.log(id);
+      console.log(this.props.post)
       if (this.state.liked) {
         API.deleteLike(id).then(this.setState({
           liked: false,
