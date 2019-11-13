@@ -1,12 +1,13 @@
 // src/components/Post/index.js
 import React, { Component } from "react";
 import "./Post.css";
-import PostComment from './PostComment'
+// import PostComment from './PostComment'
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 // import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Button from '@material-ui/core/Button';
-import { timingSafeEqual } from "crypto";
+// import { timingSafeEqual } from "crypto";
+import API from "../../adapters/API";
 
 class Post extends Component {
 
@@ -18,7 +19,10 @@ class Post extends Component {
 
   componentDidMount() {
     this.setState({
-      post: this.props.post
+      post: this.props.post,
+      followed: this.props.post.author.followed_by_current_user,
+      liked: this.props.post.liked_by_current_user,
+      like_count: this.props.post.like_count
     })
   }
   
@@ -34,12 +38,12 @@ class Post extends Component {
             </div>
             <div className="More-dots">
                 {/* <MoreHorizIcon /> */}
-                <Button
-                  onClick={() => this.handleFollowClick()}
+                {this.props.post.author.username === this.props.username ? null : <Button
+                  onClick={() => this.handleFollowClick(this.props.post.author.id)}
                   small
                   variant="contained"
                   color="primary"
-  >{this.state.followed ? "Unfollow" : "Follow"}</Button>
+  >{this.state.followed ? "Unfollow" : "Follow"}</Button>}
             </div>
           </div>
         </header>
@@ -49,12 +53,12 @@ class Post extends Component {
           </div>
         </div>
         <div className="Like-icon"
-              onClick={() => this.handleLikeClick()}>
+              onClick={() => this.handleLikeClick(this.props.post.id)}>
                 {this.state.liked ? <FavoriteIcon color="error"/> : <FavoriteBorderOutlinedIcon/>}
             
         </div>
         <div className="Like-count">
-          <p> {this.props.likes} likes</p>
+          <p> {this.state.post.like_count} likes</p>
         </div>
         <div className="Post-caption">
           <strong>Will</strong> {this.props.caption}
@@ -70,16 +74,29 @@ class Post extends Component {
       </article>;
     }
 
-    handleLikeClick = () => {
-      this.setState({
-        liked: !this.state.liked
-      })
+    handleLikeClick = (id) => {
+      console.log(id);
+      console.log(this.props.post)
+      if (this.state.liked) {
+        API.deleteLike(id).then(this.setState({
+          liked: false,
+
+        }))
+      }
+      else {
+        API.postLike(id).then(this.setState({liked: true}))
+      }
     }
 
-    handleFollowClick = () => {
-      this.setState({
-        followed: !this.state.followed
-      })
+    handleFollowClick = (id) => {
+      if (this.state.followed)
+      {API.postFollow(id).then(this.setState({
+        followed: false
+      }))}
+      else
+      {API.deleteFollow(id).then(this.setState({
+        followed: true
+    }))}
     }
 }
 export default Post;
