@@ -7,10 +7,17 @@ import PostForm from '../PostForm/PostForm'
 class Profile extends Component {
 
     state ={
-        addPost: false
+        addPost: false,
+        user: {}
     }
 
     resetPostForm = () => {this.setState({ addPost: false })}
+
+    componentDidMount() {
+        this.setState({
+            user: this.props.user
+        })
+    }
 
     render() {
 
