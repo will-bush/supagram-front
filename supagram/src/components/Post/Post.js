@@ -31,7 +31,7 @@ class Post extends Component {
         <header>
           <div className="Post-user">
             <div className="Post-user-avatar">
-              <img src="https://media.licdn.com/dms/image/C4D03AQETNALH0mqtNA/profile-displayphoto-shrink_100_100/0?e=1578528000&v=beta&t=oVlsRj3AsptLp6v7hud8qYE8qVqZoJ-818ljIdOy6-Y" alt="Will" />
+              <img  src="https://media.licdn.com/dms/image/C4D03AQETNALH0mqtNA/profile-displayphoto-shrink_100_100/0?e=1578528000&v=beta&t=oVlsRj3AsptLp6v7hud8qYE8qVqZoJ-818ljIdOy6-Y" alt="Will" />
             </div>
             <div className="Post-user-nickname">
               <span>{this.props.post.author.username}</span>
@@ -69,7 +69,8 @@ class Post extends Component {
         {/* <PostComment name="Angus" content="This is a comment on a post."/> */}
         {/* <PostComment name="Mike" content="This is another comment on the same post."/> */}
         <div className="Small-text">
-            4 HOURS AGO
+            1 HOUR AGO
+            
         </div>
       </article>;
     }
