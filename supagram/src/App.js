@@ -56,7 +56,7 @@ class App extends Component {
     <AppBar />
     <Switch>
       <Route
-      path='/signin'
+      path='/' exact
       component={routerProps => (
         <SignInForm {...routerProps} signIn={this.signIn} addUserToState={this.addUserToState}/>
       )}

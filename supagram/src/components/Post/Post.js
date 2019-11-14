@@ -34,7 +34,7 @@ class Post extends Component {
               <img src="https://media.licdn.com/dms/image/C4D03AQETNALH0mqtNA/profile-displayphoto-shrink_100_100/0?e=1578528000&v=beta&t=oVlsRj3AsptLp6v7hud8qYE8qVqZoJ-818ljIdOy6-Y" alt="Will" />
             </div>
             <div className="Post-user-nickname">
-              <span>{this.props.username}</span>
+              <span>{this.props.post.author.username}</span>
             </div>
             <div className="More-dots">
                 {/* <MoreHorizIcon /> */}
@@ -54,7 +54,7 @@ class Post extends Component {
         </div>
         <div className="Like-icon"
               onClick={() => this.handleLikeClick(this.props.post.id)}>
-                {this.state.liked ? <FavoriteIcon color="error"/> : <FavoriteBorderOutlinedIcon/>}
+                {this.state.post.liked_by_current_user ? <FavoriteIcon color="error"/> : <FavoriteBorderOutlinedIcon/>}
             
         </div>
         <div className="Like-count">
@@ -77,14 +77,23 @@ class Post extends Component {
     handleLikeClick = (id) => {
       console.log(id);
       console.log(this.props.post)
-      if (this.state.liked) {
-        API.deleteLike(id).then(this.setState({
-          liked: false,
-
+      if (this.state.post.liked_by_current_user) {
+        API.deleteLike(id).then(resp => this.setState({
+          post: {
+            ...this.state.post,
+            like_count: resp.post.like_count,
+            liked_by_current_user: resp.post.liked_by_current_user
+          },
         }))
       }
       else {
-        API.postLike(id).then(this.setState({liked: true}))
+        API.postLike(id).then(resp => this.setState({
+          post: {
+            ...this.state.post,
+            like_count: resp.post.like_count,
+            liked_by_current_user: resp.post.liked_by_current_user
+          },
+        }))
       }
     }
 
