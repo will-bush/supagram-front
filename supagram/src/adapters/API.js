@@ -3,6 +3,7 @@ const SIGN_IN_URL = BASE_URL + "/sign-in";
 const SIGNUP_URL = BASE_URL + "/sign-up";
 const POSTS_URL = BASE_URL + "/posts";
 const FOLLOW_URL = BASE_URL + "/follow";
+const PROFILE_URL = BASE_URL + "/users/" 
 
 const signIn = credentials => {
   const config = {
@@ -117,6 +118,18 @@ const getFeed = () => {
     .then(res => res.json())
 }
 
+const getProfile = (username) => {
+  const config = {
+    headers: {
+      "Authorization": localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  }
+  return fetch(PROFILE_URL + username, config)
+    .then(res => res.json())
+}
+
 
 const API = {
   signIn,
@@ -126,7 +139,8 @@ const API = {
   deleteLike,
   postFollow,
   deleteFollow,
-  getFeed
+  getFeed,
+  getProfile
 }
 
 export default API;

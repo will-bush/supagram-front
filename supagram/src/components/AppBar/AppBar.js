@@ -30,7 +30,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Supergram
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button href="http://localhost:3001/sign-up" color="inherit">Sign Up</Button>
         </Toolbar>
       </AppBar>
     </div>

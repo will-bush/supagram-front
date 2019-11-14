@@ -93,7 +93,7 @@ export class SignInForm extends Component {
       .then(data => {
         this.props.addUserToState(data.user)
         localStorage.setItem("token", data.token)
-        this.props.history.push('/profile')
+        this.props.history.push('/feed')
       })
       .catch(console.error)
   }

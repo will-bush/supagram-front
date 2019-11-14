@@ -62,7 +62,12 @@ class App extends Component {
       )}
       />
     <Route 
-    path='/profile'
+    path='/feed'
+    component={routerProps => (
+      <UserPage {...routerProps} user={this.state.user}/>
+    )}/>
+    <Route 
+    path={'/' + this.state.user.username}
     component={routerProps => (
       <UserPage {...routerProps} user={this.state.user}/>
     )}/>
