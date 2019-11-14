@@ -35,7 +35,7 @@ export class PostForm extends Component {
           Upload image
           
         </label>
-        <input
+        <input className="input"
             type="file"
             name="image"
             accept="image/*"
@@ -47,6 +47,7 @@ export class PostForm extends Component {
             variant="contained"
             color="primary"
             >Submit</Button>
+            <p className="cancel" onClick={() => this.props.resetPostForm()}>CANCEL</p>
       </form>
       </div></Container>
     );
